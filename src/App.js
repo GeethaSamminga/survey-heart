@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchData, addTodo, updateTodo, deleteTodo } from "./redux/action/action";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, TextField, Button, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Checkbox } from '@mui/material';
+import { Grid, TextField, Button, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Checkbox,Typography } from '@mui/material';
 const App = () => {
   const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState(""); 
@@ -76,10 +76,19 @@ const App = () => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>ID</TableCell>
-          <TableCell align="center">Todo</TableCell>
-          <TableCell align="center">Completed</TableCell>
-          <TableCell align="center">Actions</TableCell>
+        <TableCell>
+  <Typography variant="h6" align="center">ID</Typography>
+</TableCell>
+<TableCell align="center">
+  <Typography variant="h6">Todo</Typography>
+</TableCell>
+<TableCell align="center">
+  <Typography variant="h6">Completed</Typography>
+</TableCell>
+<TableCell align="center">
+  <Typography variant="h6">Actions</Typography>
+</TableCell>
+
         </TableRow>
       </TableHead>
       <TableBody>
