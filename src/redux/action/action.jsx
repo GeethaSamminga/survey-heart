@@ -27,6 +27,7 @@ export const addTodo = (newTodo) => async (dispatch, getState) => {
       const currentTodos = getState().todos;
 
       const newId = currentTodos.length + 1;
+      console.log(newId)
 
       const result = await axios.post(
           "https://dummyjson.com/todos/add",
@@ -42,10 +43,10 @@ export const addTodo = (newTodo) => async (dispatch, getState) => {
               },
           }
       );
-
+console.log(result,"response")
       dispatch({
           type: ADD_TODO,
-          payload: { ...result.data, id: newId }, // Removed the stray 'c'
+          payload: { ...result.data, id: newId },
       });
   } catch (error) {
       console.error("Error adding todo:", error.response ? error.response.data : error);
@@ -74,7 +75,7 @@ export const updateTodo = (todoId, updatedTodo) => async (dispatch) => {
       console.error("Error updating todo:", error.response ? error.response.data : error);
     }
   };
-  
+
 
 // Delete a to-do
 export const deleteTodo = (todoId) => async (dispatch) => {
