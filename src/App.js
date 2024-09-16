@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchData, addTodo, updateTodo, deleteTodo } from "./redux/action/action";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField, Card, CardContent, Typography, Checkbox, CardActions } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Checkbox, Button, TextField} from '@mui/material';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,24 +59,29 @@ const App = () => {
         </Button>
     </div>
 </div>
-
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" ,marginTop:"50px",justifyContent: 'center'}}>
-        {todosList.map((data) => (
-          <Card key={data.id} style={{ width: "300px" }}>
-            <CardContent>
-              <Typography variant="h6" component="div">
-                ID: {data.id}
-              </Typography>
-              <Typography variant="body1" component="div" style={{ textAlign: 'center'}}>
-                {data.todo}
-              </Typography>
+<div style={{ marginTop: "50px", display: 'flex', justifyContent: 'center' }}>
+  <TableContainer>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>ID</TableCell>
+          <TableCell align="center">Todo</TableCell>
+          <TableCell align="center">Completed</TableCell>
+          <TableCell align="center">Actions</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {todosList.map((data, index) => (
+          <TableRow key={index}>
+            <TableCell>{data.id}</TableCell>
+            <TableCell align="center">{data.todo}</TableCell>
+            <TableCell align="center">
               <Checkbox
-    checked={data.completed}
-    onChange={() => handleCheckboxChange(data.id, data.completed, data.todo)}
-/>
-
-            </CardContent>
-            <CardActions>
+                checked={data.completed}
+                onChange={() => handleCheckboxChange(data.id, data.completed, data.todo)}
+              />
+            </TableCell>
+            <TableCell align="center">
               {editId === data.id ? (
                 <>
                   <TextField
@@ -91,7 +96,12 @@ const App = () => {
                 </>
               ) : (
                 <>
-                  <Button variant="contained" color="secondary" onClick={() => { setEditTodo(data.todo); setEditId(data.id); }}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => { setEditTodo(data.todo); setEditId(data.id); }}
+                    style={{ marginRight: '8px' }} 
+                  >
                     Edit
                   </Button>
                   <Button variant="contained" color="error" onClick={() => handleDeleteTodo(data.id)}>
@@ -99,10 +109,14 @@ const App = () => {
                   </Button>
                 </>
               )}
-            </CardActions>
-          </Card>
+            </TableCell>
+          </TableRow>
         ))}
-      </div>
+      </TableBody>
+    </Table>
+  </TableContainer>
+</div>
+
     </>
   );
 };

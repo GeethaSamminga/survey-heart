@@ -53,7 +53,7 @@ export const addTodo = (newTodo) => async (dispatch, getState) => {
 };
 
 
-// Update an existing to-do
+// Update  to-do
 export const updateTodo = (todoId, updatedTodo) => async (dispatch) => {
     try {
       const result = await axios.put(
@@ -74,6 +74,7 @@ export const updateTodo = (todoId, updatedTodo) => async (dispatch) => {
       console.error("Error updating todo:", error.response ? error.response.data : error);
     }
   };
+  
 
 // Delete a to-do
 export const deleteTodo = (todoId) => async (dispatch) => {
